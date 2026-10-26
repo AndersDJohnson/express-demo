@@ -2,9 +2,6 @@
   "functions": {
     "src/index.ts": {
       "includeFiles": "src/views/**"
-    },
-    "src/index.js": {
-      "includeFiles": "src/views/**"
     }
   }
 }
