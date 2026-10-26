@@ -8,6 +8,10 @@ app.get('/', (req, res) => {
     res.send('Hello, world!')
 })
 
+app.get('/health', (req, res) => {
+    res.sendStatus(200)
+})
+
 // Note: Vercel does not actually use this directly.
 // It intercepts and rewrites to grab a reference to the app server function.
 // It deploys the app as a serverless function rather than a traditional server.
