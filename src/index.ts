@@ -11,6 +11,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(import.meta.dirname, "views"));
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/", (_req, res) => {
   res.send("Hello, world!");
@@ -41,6 +42,12 @@ postsApiRouter
 
     const id = inserted[0].id;
 
+    // HTML form submissions are sent as application/x-www-form-urlencoded
+    if (req.is("application/x-www-form-urlencoded")) {
+      res.redirect(`/posts/${id}`);
+      return;
+    }
+
     res.send(`Post with ID ${id} created`);
   });
 
@@ -50,6 +57,11 @@ postsUiRouter.route("/").get(async (_req, res) => {
   const posts = await db.select().from(postsTable);
   res.render("posts/index", { posts });
 });
+
+postsUiRouter.route("/new").get((_req, res) => {
+  res.render("posts/new");
+});
+
 postsUiRouter.route("/:id").get(async (req, res) => {
   const posts = await db
     .select()
