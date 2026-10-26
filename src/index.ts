@@ -32,7 +32,7 @@ postsRouter
         title: req.body.title,
         content: req.body.content,
       })
-      .returning({ id: postsTable.id })
+      .returning()
 
     const id = inserted[0].id;
 
