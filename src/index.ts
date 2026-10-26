@@ -5,14 +5,41 @@ const port = process.env.PORT || 3000;
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
   res.send("Hello, world!");
 });
 
-app.get("/posts", async (req, res) => {
-  const posts = await db.select().from(postsTable);
-  res.send(posts);
-});
+const postsRouter = express.Router();
+
+postsRouter
+  .route("/")
+  .get(async (req, res) => {
+    const posts = await db.select().from(postsTable);
+    res.send(posts);
+  })
+  /**
+   * Test with:
+   * ```sh
+   * curl -X POST -H 'content-type: application/json' -d '{"title":"New Post","content":"My content."}' http://localhost:3000/posts
+   * ```
+   */
+  .post(async (req, res) => {
+    const inserted = await db
+      .insert(postsTable)
+      .values({
+        title: req.body.title,
+        content: req.body.content,
+      })
+      .returning({ id: postsTable.id })
+
+    const id = inserted[0].id;
+
+    res.send(`Post with ID ${id} created`);
+  });
+
+app.use("/posts", postsRouter);
 
 app.get("/health", (req, res) => {
   res.sendStatus(200);
