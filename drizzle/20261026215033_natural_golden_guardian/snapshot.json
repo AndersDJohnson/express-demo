@@ -1,0 +1,63 @@
+{
+  "type": "diff",
+  "version": "9",
+  "dialect": "postgres",
+  "id": "201c48e4-e7e1-4641-a87d-827491794fef",
+  "prevIds": [
+    "c32049e5-2c47-46ea-a106-7053f7d0aa7c"
+  ],
+  "footprints": [
+    {
+      "statementType": "alter_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "posts_table",
+        "title"
+      ],
+      "writes": [
+        "s|colprop|public.posts_table.title.notNull"
+      ],
+      "reads": [
+        "n|tbl|public.posts_table",
+        "n|sch|public",
+        "n|col|public.posts_table.title"
+      ],
+      "sqlHash": "2a7b02b215943b69"
+    },
+    {
+      "statementType": "alter_column",
+      "statementTarget": [
+        "column",
+        "public",
+        "posts_table",
+        "content"
+      ],
+      "writes": [
+        "s|colprop|public.posts_table.content.notNull"
+      ],
+      "reads": [
+        "n|tbl|public.posts_table",
+        "n|sch|public",
+        "n|col|public.posts_table.content"
+      ],
+      "sqlHash": "3660a8d50f519007"
+    }
+  ],
+  "deltas": [
+    {
+      "op": "alter",
+      "key": "columns\u0000[\"public\",\"posts_table\",\"title\"]",
+      "set": {
+        "notNull": true
+      }
+    },
+    {
+      "op": "alter",
+      "key": "columns\u0000[\"public\",\"posts_table\",\"content\"]",
+      "set": {
+        "notNull": true
+      }
+    }
+  ]
+}
