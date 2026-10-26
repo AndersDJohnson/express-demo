@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    // "module": "nodenext",
+    // "target": "es2022",
     "noEmit": true,
-    "moduleResolution": "bundler"
+    "skipLibCheck": true,
+    // "moduleResolution": "nodenext"
   }
 }
